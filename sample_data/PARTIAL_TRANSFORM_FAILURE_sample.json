@@ -1,0 +1,7 @@
+{
+  "file_name": "TRADE_EXTRACT_sample.csv",
+  "errors": [
+    {"line": 4, "error": "Missing trade ID"},
+    {"line": 8, "error": "Invalid counterparty code"}
+  ]
+}

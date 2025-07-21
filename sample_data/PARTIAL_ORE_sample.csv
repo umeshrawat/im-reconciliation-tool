@@ -1,0 +1,4 @@
+TradeID,Issue  
+T001,Notional mismatch  
+T002,Missing trade ID  
+T003,Invalid counterparty code  
