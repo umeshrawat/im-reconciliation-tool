@@ -1,3 +1,5 @@
 watchdog
 pandas
 streamlit
+python-dotenv
+streamlit-autorefresh

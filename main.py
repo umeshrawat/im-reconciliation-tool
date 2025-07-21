@@ -1,21 +1,25 @@
 import os
-from src.folder_monitor import start_folder_monitoring
-from src.reconciliation_engine import start_reconciliation_process
-from src.chat_ui import start_chat_ui
+from src.folder_monitor import monitor_folders
+from src.chat_ui import main as chat_ui_main
+import streamlit as st
 
 def main():
     # Load environment variables
     from dotenv import load_dotenv
     load_dotenv()
 
-    # Start folder monitoring in a separate thread
-    folder_monitor_thread = start_folder_monitoring()
-
-    # Start the reconciliation process
-    reconciliation_thread = start_reconciliation_process()
+    # Only start folder monitoring once per session
+    if "monitor_started" not in st.session_state:
+        folders_to_monitor = [
+            os.getenv("OUTGOING_FOLDER", "outgoing/"),
+            os.getenv("INCOMING_ACK_FOLDER", "incoming/out/"),
+            os.getenv("INCOMING_ERROR_FOLDER", "incoming/error/")
+        ]
+        monitor_folders(folders_to_monitor)
+        st.session_state["monitor_started"] = True
 
     # Start the chat UI
-    start_chat_ui()
+    chat_ui_main()
 
 if __name__ == "__main__":
     main()
