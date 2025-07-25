@@ -1,7 +1,7 @@
 import streamlit as st
 import os
-from .utils.file_parsers import parse_trade_extract, parse_acknowledgment
-from .utils.state_cache import StateCache
+from utils.file_parsers import parse_trade_extract, parse_acknowledgment
+from utils.state_cache import StateCache
 from streamlit_autorefresh import st_autorefresh
 
 # Initialize state cache

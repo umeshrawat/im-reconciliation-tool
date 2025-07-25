@@ -1,0 +1,5 @@
+# Ignore project plan markdown
+PROJECT_PLAN.md
+
+# Ignore macOS system files
+.DS_Store 

@@ -1,6 +1,6 @@
 import os
-from src.folder_monitor import monitor_folders
-from src.chat_ui import main as chat_ui_main
+from watchers.folder_monitor import monitor_folders
+from chat.chat_ui import main as chat_ui_main
 import streamlit as st
 
 def main():
