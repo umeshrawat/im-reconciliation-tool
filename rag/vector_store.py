@@ -296,8 +296,9 @@ class IMReconciliationVectorStore:
         Persist the database to disk.
         """
         try:
-            self.client.persist()
-            logger.info("Vector store persisted to disk")
+            # ChromaDB automatically persists when using persist_directory
+            # No need to call persist() method in newer versions
+            logger.info("Vector store data is automatically persisted")
         except Exception as e:
             logger.error(f"Error persisting vector store: {e}")
     

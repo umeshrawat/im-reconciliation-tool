@@ -147,17 +147,15 @@ def main():
     # Load environment variables
     load_dotenv()
     
-    # Initialize orchestrator
-    orchestrator = IMReconciliationOrchestrator()
-    
-    # Process existing files on startup
-    orchestrator.process_existing_files()
-    
-    # Start folder monitoring (only once per session)
-    if "monitor_started" not in st.session_state:
-        orchestrator.start_folder_monitoring()
-        st.session_state["monitor_started"] = True
-        st.session_state["orchestrator"] = orchestrator
+    # Initialize orchestrator only once per session
+    if "orchestrator" not in st.session_state:
+        st.session_state.orchestrator = IMReconciliationOrchestrator()
+        
+        # Process existing files on startup (only once)
+        st.session_state.orchestrator.process_existing_files()
+        
+        # Start folder monitoring (only once)
+        st.session_state.orchestrator.start_folder_monitoring()
     
     # Start the chat interface
     chat = IMReconciliationChat()

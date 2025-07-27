@@ -16,6 +16,10 @@ def parse_trade_extract(file_path: str) -> Dict[str, Any]:
     """
     try:
         df = pd.read_csv(file_path)
+        
+        # Clean column names (remove whitespace)
+        df.columns = df.columns.str.strip()
+        
         required_columns = ['TradeID', 'Notional', 'Currency', 'Counterparty']
         
         # Validate required columns
@@ -58,6 +62,10 @@ def parse_acknowledgment(file_path: str) -> Dict[str, Any]:
     """
     try:
         df = pd.read_csv(file_path)
+        
+        # Clean column names (remove whitespace)
+        df.columns = df.columns.str.strip()
+        
         required_columns = ['TradeID', 'Status']
         
         # Validate required columns

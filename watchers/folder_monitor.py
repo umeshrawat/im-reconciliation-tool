@@ -59,13 +59,21 @@ def monitor_folders(folder_paths: List[str], callback: Callable = None, debounce
         callback: Function to call when new files are detected
         debounce_time: Minimum time between processing events for the same file
     """
+    # Check if monitoring is already active
+    if hasattr(monitor_folders, '_observer') and monitor_folders._observer.is_alive():
+        logger.info("Folder monitoring is already active")
+        return monitor_folders._thread
+    
     event_handler = TradeFileHandler(callback=callback, debounce_time=debounce_time)
     observer = Observer()
     
     for folder in folder_paths:
         if os.path.exists(folder):
-            observer.schedule(event_handler, folder, recursive=False)
-            logger.info(f"Monitoring folder: {folder}")
+            try:
+                observer.schedule(event_handler, folder, recursive=False)
+                logger.info(f"Monitoring folder: {folder}")
+            except Exception as e:
+                logger.error(f"Error scheduling folder {folder}: {e}")
         else:
             logger.warning(f"Folder does not exist: {folder}")
     
@@ -83,6 +91,11 @@ def monitor_folders(folder_paths: List[str], callback: Callable = None, debounce
 
     thread = threading.Thread(target=monitor, daemon=True)
     thread.start()
+    
+    # Store references to prevent garbage collection
+    monitor_folders._observer = observer
+    monitor_folders._thread = thread
+    
     return thread
 
 if __name__ == "__main__":
