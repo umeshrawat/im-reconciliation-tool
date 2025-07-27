@@ -2,6 +2,7 @@
   "file_name": "TRADE_EXTRACT_20250720.csv",
   "errors": [
     {"line": 4, "error": "Missing trade ID"},
-    {"line": 8, "error": "Invalid counterparty code"}
+    {"line": 8, "error": "Invalid counterparty code"},
+    {"line": 12, "error": "Invalid currency format"}
   ]
 } 

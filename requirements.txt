@@ -3,3 +3,10 @@ pandas
 streamlit
 python-dotenv
 streamlit-autorefresh
+chromadb
+sentence-transformers
+langchain
+langchain-community
+langchain-chroma
+numpy
+scikit-learn
